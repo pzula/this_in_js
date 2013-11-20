@@ -1,0 +1,30 @@
+
+title "What about 'this'?"
+
+theme "slate"
+
+description "A lightning talk on the quirks of 'this' in Javascript"
+
+
+ section "Introduction" do
+   slides "intro.md"
+   slides "this_changes.md"
+ end
+
+ section "Code Samples" do
+   slides "bob.md"
+#   slides "code_samples"
+ end
+
+# section "Conclusion" do
+#   slides "closing.md"
+# end
+
+# Or if you are interested solely in linking to slides without sections you can
+# use the following:
+#
+# slides "intro.md"
+# slides "code_sample.md"
+# slides "code_samples"
+# slides "closing.md"
+#
