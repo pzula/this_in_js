@@ -1,5 +1,5 @@
 !SLIDE title
 
-# What about `this`?
+# What is `this`?
 
 ### demystifying JavaScript's `this` object

@@ -63,8 +63,8 @@ Meanwhile, inside of the Bob object:
 var Bob = function() {
 	###
 
-	this.inputField = $("bob-input");
-	this.inputButton = $("bob-input-button");
+	this.inputField = $("#bob-input");
+	this.inputButton = $("#bob-input-button");
 
 	this.inputButton.click(function(eventObj) {
 		this.inputField;
@@ -102,12 +102,16 @@ this.inputButton.click(function(eventObj) {
 *to save its state
 
 ```
-this.inputField = $("bob-input");
-this.inputButton = $("bob-input-button");
-var self = this;
+var Bob = function() {
+	###
+	
+	this.inputField = $("#bob-input");
+	this.inputButton = $("#bob-input-button");
+	var self = this;
 
-this.inputButton.click(function(eventObj) {
-	self.inputField;
+	this.inputButton.click(function(eventObj) {
+		self.inputField;
+	});
 });
 ```
 
@@ -148,4 +152,15 @@ var Bob = function() {
 !SLIDE
 
 ![Pikachu is happy](/images/happy-pikachu.png)
+	
+!SLIDE
 
+# Remember
+
+`var self = this;`
+
+and
+
+`$.proxy();`
+
+are your friends when using `this` in jQuery
