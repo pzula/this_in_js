@@ -42,6 +42,7 @@ function openPokeball() {
 ```
 
 Here `function openPokeball() === undefined`
+and `this` is not yet set
 
 !SLIDE
 
@@ -54,9 +55,9 @@ var Pikachu = {
 	type: "electric",
 	ability: "static",
 	attacks: ["growl", "thunder shock", "tail whip"],
-	stats: function() {
-		return "Type is" + this.type;
-		return "Ability is" + this.ability;
+	toString: function() {
+		return "Type is" + this.type + "\n"
+		+ "Ability is" + this.ability;
 	}
 }
 
@@ -64,10 +65,10 @@ var Pikachu = {
 
 !SLIDE
 
-In this case, when `Pikachu.stats();` is invoked, `this` gets bound to the `Pikachu` object, as we can see in by running `console.log()` on it:
+In this case, when `Pikachu.toString();` is invoked, `this` gets bound to the `Pikachu` object, as we can see in by running `console.log()` on it:
 
 ```
-console.log(Pikachu.stats()); 
+console.log(Pikachu.toString()); 
 // logs:
 // Type is electric
 // Ability is static
