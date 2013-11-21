@@ -2,4 +2,4 @@
 
 # What is `this`?
 
-### demystifying JavaScript's `this` object
+### demystifying JavaScript's `this` keyword

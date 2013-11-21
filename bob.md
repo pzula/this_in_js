@@ -67,7 +67,7 @@ var Bob = function() {
 	this.inputButton = $("#bob-input-button");
 
 	this.inputButton.click(function(eventObj) {
-		this.inputField;
+		console.log(this.inputField);
 	});
 	
 	###
@@ -79,18 +79,24 @@ var Bob = function() {
 
 
 !SLIDE
-#`this` is not Bob
+# Unexpected results!
 
 ```
 ###
 
 this.inputButton.click(function(eventObj) {
-	this.inputField;
-	\\ 'this' is not Bob
-	\\ 'this' is actually the inputButton
+	console.log(this.inputField);
+	\\ this outputs 'undefined' instead of our input field
+	\\ 'this' is not our instance of Bob
+	\\ 'this' is actually the element that was clicked
 });
 
 ```
+!SLIDE
+#Why is that happening?
+
+JavaScript has the methods `bind(newThis);` and `apply(newThis, args..);`, which jQuery uses to reset `this`. It's important to keep this in mind when making assumptions about the value of `this` because anything can change it!
+
 
 !SLIDE title
 
@@ -110,7 +116,7 @@ var Bob = function() {
 	var self = this;
 
 	this.inputButton.click(function(eventObj) {
-		self.inputField;
+		console.log(self.inputField);
 	});
 });
 ```
@@ -142,7 +148,7 @@ var Bob = function() {
 
 	this.inputButton.click( $.proxy(function(eventObj) {
 		// Execute the proxy but within the Bob object
-		this.inputField
+		console.log(this.inputField);
 	},this));
 	
 	###
@@ -153,6 +159,7 @@ var Bob = function() {
 
 ![Pikachu is happy](/images/happy-pikachu.png)
 	
+
 !SLIDE
 
 # Remember
