@@ -4,36 +4,13 @@
 
 ![Bob the Pokemon Master](/images/pokemon-bob.jpg)
 
-!SLIDE
+!SLIDE 
 
-```
-var Bob = function() {
-	this.hey = function(input) {
-		if (this.isShouting(input)) {
-			return "Whoa, chill out!";
-		} else if (this.isAQuestion(input)) {
-			return "Sure"
-		} else if (this.isSilence(input)) {
-      return "Fine. Be that way!";
-    } else {
-			return "Whatever.";
-		}
-	}
+# `this` works as expected
 
-	this.isShouting = function(input) {
-		return input.search(/[a-zA-Z]/) != -1 
-		&& input.toUpperCase() === input;
-	}
+![This in Bob](/images/this_bob.png)
 
-	this.isAQuestion = function(input) {
-		return input[input.length - 1] === "?";
-	}
-
-	this.isSilence = function(input) {
-		return input.trim() === "";
-	}
-}
-```
+Here, `this` refers to our instance of Bob
 
 !SLIDE
 
@@ -59,20 +36,8 @@ var Bob = function() {
 
 Meanwhile, inside of the Bob object:
 
-```
-var Bob = function() {
-	###
+![Inside the Bob object](/images/meanwhile_bob.png)
 
-	this.inputField = $("#bob-input");
-	this.inputButton = $("#bob-input-button");
-
-	this.inputButton.click(function(eventObj) {
-		console.log(this.inputField);
-	});
-	
-	###
-});
-```
 
 !SLIDE
 ![Pikachu is mad](/images/mad-pikachu.png)
@@ -81,17 +46,8 @@ var Bob = function() {
 !SLIDE
 # Unexpected results!
 
-```
-###
+![Unexpected results](/images/unexpected_results.png)
 
-this.inputButton.click(function(eventObj) {
-	console.log(this.inputField);
-	\\ this outputs 'undefined' instead of our input field
-	\\ 'this' is not our instance of Bob
-	\\ 'this' is actually the element that was clicked
-});
-
-```
 !SLIDE
 #Why is that happening?
 
@@ -107,19 +63,9 @@ JavaScript has the methods `bind(newThis);` and `apply(newThis, args..);`, which
 # assign `this` to a variable* 
 *to save its state
 
-```
-var Bob = function() {
-	###
-	
-	this.inputField = $("#bob-input");
-	this.inputButton = $("#bob-input-button");
-	var self = this;
+![Define self](/images/define_self.png)
 
-	this.inputButton.click(function(eventObj) {
-		console.log(self.inputField);
-	});
-});
-```
+Now, `self` will refer to the Bob object and return the input field
 
 !SLIDE 
 # And all is well with the world
@@ -132,7 +78,7 @@ var Bob = function() {
 
 !SLIDE
 
-# Introducing $.proxy();
+# Pokemasters use $.proxy();
 
 `$.proxy();` can take two parameters: `function` and `context`.
 
@@ -142,18 +88,9 @@ It will take in the function you specify, and return a new one with the context 
 
 # Using $.proxy(); with Bob
 
-```
-var Bob = function() {
-	###
+![Using Proxy](/images/proxy.png)
 
-	this.inputButton.click( $.proxy(function(eventObj) {
-		// Execute the proxy but within the Bob object
-		console.log(this.inputField);
-	},this));
-	
-	###
-});
-```
+Now `this` is within the context of our Bob object
 
 !SLIDE
 
@@ -164,10 +101,10 @@ var Bob = function() {
 
 # Remember
 
-`var self = this;`
+## **save the state of `this`**
 
-and
+or
 
-`$.proxy();`
+use `$.proxy();` when you're feeling hip
 
-are your friends when using `this` in jQuery
+## to solve `this` woes in jQuery
